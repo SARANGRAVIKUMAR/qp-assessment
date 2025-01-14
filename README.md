@@ -1,2 +1,47 @@
+# Question Pro API
+
+## Project Structure
+
+```
+src/
+├── config/         # Configuration files (database, passport)
+├── controllers/    # Request handlers
+├── entities/       # Database entities
+├── helpers/        # Utility functions and constants
+├── interfaces/     # TypeScript interfaces
+├── middleware/     # Custom middleware (auth, etc.)
+├── routes/         # API routes
+└── services/       # Business logic
+```
+
+## Prerequisites
+
+- Node.js
+- MySQL
+- TypeScript
+
+## Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+## Development
+
+To run the project in development mode with hot reloading:
+
+```bash
+npm run dev
+```
+
+For production build:
+
+```bash
+npm run build
+npm start
+```
+
 Api Documentation:
-https://documenter.getpostman.com/view/23488853/2sAYQXot2U
+```https://documenter.getpostman.com/view/23488853/2sAYQXot2U```
