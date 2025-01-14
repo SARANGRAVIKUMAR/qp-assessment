@@ -1,18 +1,19 @@
 import { Router } from 'express';
 import * as UserController from '../controllers/UserController';
+import { authenticate, isAdmin } from '../middleware/auth.middleware';
 
 const router = Router();
 
-// Create a new user
-router.post('/', UserController.createUser);
+// Admin routes
+router.post('/admin-user', authenticate, isAdmin, UserController.createAdminUser);
 
-// Get all users
-router.get('/', UserController.getAllUsers);
+// Public routes
+router.post('/sign-up', UserController.signUp);
+router.post('/login', UserController.login);
 
-// Update a user
-router.put('/:id', UserController.updateUser);
-
-// Delete a user
-router.delete('/:id', UserController.deleteUser);
+// Protected routes
+router.get('/users', authenticate, UserController.getAllUsers);
+router.put('/users/:id', authenticate, UserController.updateUser);
+router.delete('/users/:id', authenticate, UserController.deleteUser);
 
 export default router;

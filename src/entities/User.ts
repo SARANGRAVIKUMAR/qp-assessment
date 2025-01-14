@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert } from 'typeorm';
+import bcrypt from 'bcryptjs';
 
 @Entity('users')
 export class User {
@@ -6,16 +7,19 @@ export class User {
   id!: number;
 
   @Column()
-  firstName: string;
+  firstName!: string;
 
   @Column()
-  lastName: string;
+  lastName!: string;
 
   @Column({ unique: true })
-  email: string;
+  email!: string;
+
+  @Column({ default: 0 })
+  role!: number
 
   @Column({ select: false })
-  password: string;
+  password!: string;
 
   @CreateDateColumn()
   createdAt!: Date;
@@ -23,15 +27,20 @@ export class User {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  constructor(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-  ) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
+  @BeforeInsert()
+  async hashPassword() {
+    if (this.password) {
+      const salt = await bcrypt.genSalt(10);
+      this.password = await bcrypt.hash(this.password, salt);
+    }
+  }
+
+  async comparePassword(candidatePassword: string): Promise<boolean> {
+    console.log(this.password, candidatePassword);
+    return bcrypt.compare(candidatePassword, this.password);
   }
 }
+function Default(arg0: number): (target: User, propertyKey: "role") => void {
+  throw new Error('Function not implemented.');
+}
+

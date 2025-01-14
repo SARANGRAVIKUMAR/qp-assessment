@@ -10,4 +10,5 @@ router.use('/health', healthRouter);
 // User routes
 router.use('/users', userRouter);
 
+export default router;
 export { router as routes };
