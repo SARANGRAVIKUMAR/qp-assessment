@@ -40,7 +40,4 @@ export class User {
     return bcrypt.compare(candidatePassword, this.password);
   }
 }
-function Default(arg0: number): (target: User, propertyKey: "role") => void {
-  throw new Error('Function not implemented.');
-}
 
