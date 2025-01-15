@@ -3,6 +3,18 @@ export const Constants = {
     ADMIN_ROLE: 1,
     CLIENT_ROLE: 0,
 
+    // Constant Values
+    PAGE_SIZE: 10,
+    DEFAULT_PAGE: 1,
+
+    // Status Codes
+    SUCCESS_CODE: 200,
+    SERVER_ERROR_CODE: 500,
+    ERROR_CODE: 400,
+    RESOURCE_CREATED_CODE: 201,
+    UNAUTHORIZED_CODE: 401,
+
+
     // JWT
     JWT_SECRET: process.env.JWT_SECRET || "",
 
@@ -22,5 +34,21 @@ export const Constants = {
     USER_NOT_FOUND: 'User not found',
 
     // Server Error Messages
-    INTERNAL_SERVER_ERROR: 'Something went wrong!'
+    INTERNAL_SERVER_ERROR: 'Something went wrong!',
+
+    // Grocery Operation Messages
+
+    ERROR_FETCHING_GROCERIES: 'Error fetching groceries',
+    ERROR_FETCHING_GROCERY: "Error fetching grocery",
+    ERROR_CREATING_GROCERY: 'Error creating grocery',
+    ERROR_UPDATING_GROCERY: 'Error updating grocery',
+    ERROR_DELETING_GROCERY: 'Error deleting grocery',
+    GROCERY_NOT_FOUND: 'Grocery not found',
+
+    SUCCESS_CREATING_GROCERY: 'Grocery created successfully',
+    SUCCESS_UPDATING_GROCERY: 'Grocery updated successfully',
+    SUCCESS_DELETING_GROCERY: 'Grocery deleted successfully',
+    // Common Messages
+    SUCCESS: 'Success',
+    ERROR: 'Error',
 };

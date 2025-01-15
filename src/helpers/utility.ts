@@ -2,10 +2,6 @@ import { User } from "@/entities/User";
 import { Constants } from "./constants";
 import jwt from 'jsonwebtoken';
 
-
-export const isAdmin = (role: number): boolean => {
-    return role === Constants.ADMIN_ROLE;
-};
 export const createUserToken = (user: User): string => {
     const secret = Constants.JWT_SECRET;
     if (!secret) {

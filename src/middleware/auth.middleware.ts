@@ -30,19 +30,22 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
 
 export const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = req.user as User | undefined;
+    const userDetails = req.user as User | undefined;
 
-    if (!user || !user.id) {
-      return res.status(401).json({ message: Constants.UNAUTHORIZED });
+    if (!userDetails) {
+      return res.status(401).json({
+        message: Constants.UNAUTHORIZED_ACCESS
+      });
     }
 
-    const userDetails = await UserService.findUserById(user.id);
-    if (!userDetails || userDetails.role !== Constants.ADMIN_ROLE) {
-      return res.status(403).json({ message: Constants.ADMIN_ACCESS_DENIED });
+    if (userDetails.role !== Constants.ADMIN_ROLE) {
+      return res.status(401).json({
+        message: Constants.ADMIN_ACCESS_DENIED
+      });
     }
 
     next();
   } catch (error) {
-    return res.status(500).json({ message: Constants.ADMIN_ACCESS_DENIED });
+    next(error);
   }
 };
