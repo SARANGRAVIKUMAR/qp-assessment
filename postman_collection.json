@@ -1,0 +1,484 @@
+{
+    "info": {
+        "name": "Question Pro API",
+        "description": "API endpoints for Question Pro project",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Order",
+            "item": [
+                {
+                    "name": "Create Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "[\n    {\n        \"id\": 1,\n        \"quantity\": 2\n    }\n]"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/order/create-order",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["order", "create-order"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 201,
+                            "name": "Order created successfully",
+                            "body": "{\"message\":\"Order created successfully\"}",
+                            "status": "Created"
+                        },
+                        {
+                            "code": 400,
+                            "name": "Bad Request",
+                            "body": "{\"message\":\"Insufficient quantity or invalid input\"}",
+                            "status": "Bad Request"
+                        },
+                        {
+                            "code": 404,
+                            "name": "Not Found",
+                            "body": "{\"message\":\"Grocery not found\"}",
+                            "status": "Not Found"
+                        },
+                        {
+                            "code": 500,
+                            "name": "Internal Server Error",
+                            "body": "{\"message\":\"Error creating order\"}",
+                            "status": "Internal Server Error"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Order History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/order/order-history",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["order", "order-history"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "OK",
+                            "body": "[{\"id\": 1, \"quantity\": 2, \"createdAt\": \"2025-01-17T10:00:00Z\"}]",
+                            "status": "OK"
+                        },
+                        {
+                            "code": 500,
+                            "name": "Internal Server Error",
+                            "body": "{\"message\":\"Error fetching order history\"}",
+                            "status": "Internal Server Error"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "User",
+            "item": [
+                {
+                    "name": "Create Admin User",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/users/admin-user",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["users", "admin-user"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 201,
+                            "name": "Admin user created",
+                            "body": "{\"message\":\"Admin user created successfully\"}",
+                            "status": "Created"
+                        },
+                        {
+                            "code": 400,
+                            "name": "Bad Request",
+                            "body": "{\"message\":\"Error creating admin user\"}",
+                            "status": "Bad Request"
+                        }
+                    ]
+                },
+                {
+                    "name": "Sign Up",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/users/sign-up",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["users", "sign-up"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 201,
+                            "name": "User signed up",
+                            "body": "{\"message\":\"User signed up successfully\"}",
+                            "status": "Created"
+                        },
+                        {
+                            "code": 400,
+                            "name": "Bad Request",
+                            "body": "{\"message\":\"Error signing up user\"}",
+                            "status": "Bad Request"
+                        }
+                    ]
+                },
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/users/login",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["users", "login"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "Login successful",
+                            "body": "{\"token\": \"<JWT_TOKEN>\"}",
+                            "status": "OK"
+                        },
+                        {
+                            "code": 401,
+                            "name": "Unauthorized",
+                            "body": "{\"message\":\"Invalid credentials\"}",
+                            "status": "Unauthorized"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get All Users",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <TOKEN>"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:3000/users",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["users"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "OK",
+                            "body": "[{\"id\": 1, \"email\": \"user@example.com\"}]",
+                            "status": "OK"
+                        },
+                        {
+                            "code": 401,
+                            "name": "Unauthorized",
+                            "body": "{\"message\":\"Unauthorized access\"}",
+                            "status": "Unauthorized"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update User",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <TOKEN>"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"newuser@example.com\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/users/:id",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["users", ":id"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "User updated",
+                            "body": "{\"message\":\"User updated successfully\"}",
+                            "status": "OK"
+                        },
+                        {
+                            "code": 404,
+                            "name": "Not Found",
+                            "body": "{\"message\":\"User not found\"}",
+                            "status": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete User",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer <TOKEN>"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:3000/users/:id",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["users", ":id"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "User deleted",
+                            "body": "{\"message\":\"User deleted successfully\"}",
+                            "status": "OK"
+                        },
+                        {
+                            "code": 404,
+                            "name": "Not Found",
+                            "body": "{\"message\":\"User not found\"}",
+                            "status": "Not Found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Grocery",
+            "item": [
+                {
+                    "name": "Create Grocery",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Grocery Item\",\n    \"description\": \"Description of grocery item\",\n    \"price\": 10.0\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/grocery",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["grocery"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 201,
+                            "name": "Grocery created",
+                            "body": "{\"message\":\"Grocery created successfully\"}",
+                            "status": "Created"
+                        },
+                        {
+                            "code": 400,
+                            "name": "Bad Request",
+                            "body": "{\"message\":\"Error creating grocery\"}",
+                            "status": "Bad Request"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update Grocery",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Updated Grocery Item\"\n}"
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/grocery/:id",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["grocery", ":id"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "Grocery updated",
+                            "body": "{\"message\":\"Grocery updated successfully\"}",
+                            "status": "OK"
+                        },
+                        {
+                            "code": 404,
+                            "name": "Not Found",
+                            "body": "{\"message\":\"Grocery not found\"}",
+                            "status": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Grocery",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/grocery/:id",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["grocery", ":id"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "Grocery deleted",
+                            "body": "{\"message\":\"Grocery deleted successfully\"}",
+                            "status": "OK"
+                        },
+                        {
+                            "code": 404,
+                            "name": "Not Found",
+                            "body": "{\"message\":\"Grocery not found\"}",
+                            "status": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get All Groceries",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/grocery",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["grocery"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "OK",
+                            "body": "[{\"id\": 1, \"name\": \"Grocery Item\"}]",
+                            "status": "OK"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Grocery by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/grocery/:id",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["grocery", ":id"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "OK",
+                            "body": "{\"id\": 1, \"name\": \"Grocery Item\"}",
+                            "status": "OK"
+                        },
+                        {
+                            "code": 404,
+                            "name": "Not Found",
+                            "body": "{\"message\":\"Grocery not found\"}",
+                            "status": "Not Found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Health",
+            "item": [
+                {
+                    "name": "Health Check",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/health",
+                            "host": ["localhost"],
+                            "port": "3000",
+                            "path": ["health"]
+                        }
+                    },
+                    "response": [
+                        {
+                            "code": 200,
+                            "name": "OK",
+                            "body": "{\"status\":\"success\",\"message\":\"Server is healthy\"}",
+                            "status": "OK"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

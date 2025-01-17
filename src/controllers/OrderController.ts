@@ -14,12 +14,8 @@ const createOrder = async (req: any, res: Response) => {
         const userDetails = req.user as User;
         const orderDetails = req.body;
 
-        if (!Array.isArray(orderDetails)) {
-            return res.status(400).json({ message: 'Order details must be an array' });
-        }
-
         await OrderService.createOrder(userDetails, orderDetails);
-        res.status(201).json({ message: "Order created successfully" });
+        res.status(Constants.RESOURCE_CREATED_CODE).json({ message: Constants.SUCCESS_CREATING_ORDER });
     } catch (error: any) {
         return res.status(Constants.ERROR_CODE).json({ message: error.message });
     }
@@ -31,8 +27,7 @@ const getOrderHistory = async (req: any, res: Response) => {
         res.json(orders);
     } catch (error: any) {
         return res.status(Constants.ERROR_CODE).json({
-            message: Constants.ERRORFETCHING_ORDER_HISTORY,
-            error: error.message || 'Unknown error occurred'
+            message: Constants.ERRORFETCHING_ORDER_HISTORY
         });
     }
 };
