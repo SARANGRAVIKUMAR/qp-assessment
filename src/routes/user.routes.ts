@@ -11,9 +11,4 @@ router.post('/admin-user', authenticate, isAdmin, UserController.createAdminUser
 router.post('/sign-up', UserController.signUp);
 router.post('/login', UserController.login);
 
-// Protected routes
-router.get('/users', authenticate, UserController.getAllUsers);
-router.put('/users/:id', authenticate, UserController.updateUser);
-router.delete('/users/:id', authenticate, UserController.deleteUser);
-
 export default router;
