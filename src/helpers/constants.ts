@@ -39,6 +39,9 @@ export const Constants = {
     // Grocery Operation Messages
 
     ERROR_FETCHING_GROCERIES: 'Error fetching groceries',
+    ERROR_CREATING_ORDER: 'Error creating order',
+    ERRORFETCHING_ORDER_HISTORY: 'Error fetching order history',
+    ERROR_INSUFFICIENT_QUANTITY: 'Insufficient quantity for grocery item',
     ERROR_FETCHING_GROCERY: "Error fetching grocery",
     ERROR_CREATING_GROCERY: 'Error creating grocery',
     ERROR_UPDATING_GROCERY: 'Error updating grocery',

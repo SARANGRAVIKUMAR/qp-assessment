@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import * as UserService from '../services/UserService';
 import passport from 'passport';
-import { User } from '@/entities/User';
+import { User } from '../entities/User';
 import { Constants } from '../helpers/constants';
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {

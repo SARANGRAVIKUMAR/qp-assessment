@@ -30,14 +30,18 @@ export class User {
   @BeforeInsert()
   async hashPassword() {
     if (this.password) {
+      console.log('Original password before hashing:', this.password);
       const salt = await bcrypt.genSalt(10);
       this.password = await bcrypt.hash(this.password, salt);
+      console.log('Hashed password after bcrypt:', this.password);
     }
   }
 
   async comparePassword(candidatePassword: string): Promise<boolean> {
-    console.log(this.password, candidatePassword);
-    return bcrypt.compare(candidatePassword, this.password);
+    console.log('Stored hashed password:', this.password);
+    console.log('Candidate password:', candidatePassword);
+    const isMatch = await bcrypt.compare(candidatePassword, this.password);
+    console.log('Password match result:', isMatch);
+    return isMatch;
   }
 }
-
