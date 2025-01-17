@@ -43,5 +43,25 @@ npm run build
 npm start
 ```
 
+## Running the Application with Docker
+
+### Build the Docker Image
+```bash
+docker-compose build
+```
+
+### Run the Application
+```bash
+docker-compose up
+```
+
+### Accessing the Application
+- The application will be accessible at `http://localhost:3000`.
+
+### Stopping the Application
+```bash
+docker-compose down
+```
+
 Api Documentation:
 ```https://documenter.getpostman.com/view/23488853/2sAYQajqPy```
